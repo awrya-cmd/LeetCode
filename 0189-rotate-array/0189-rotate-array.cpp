@@ -3,25 +3,13 @@ class Solution
 public:
     void rotate(vector<int>& arr, int k)
     {
-        int i, n;
-        vector<int> temp;
-        i = 0;
+        int n;
         n = arr.size();
-        k = k%n;
-        for(i = n-k; i<n; i++)
-        {
-            temp.push_back(arr[i]);
-        }
-
-
-        for(i=n-k-1; i>=0; i--)
-        {
-            arr[i+k] = arr[i];
-        }
-
-        for(i=0; i<k; i++)
-        {
-            arr[i] = temp[i];
-        }
+        if (n == 0)
+            return;   
+        k = k % n;           
+        reverse(arr.begin(), arr.end());
+        reverse(arr.begin(), arr.begin() + k);
+        reverse(arr.begin() + k, arr.end());
     }
 };

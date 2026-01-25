@@ -3,16 +3,21 @@ class Solution
 public:
     int majorityElement(vector<int>& nums)
     {
-        int n, i;
-        map<int, int> mp; //element -> frequency
+        int i, n, element, count;
+        count = 0;
         n = nums.size();
-        for(i=0; i<n; i++)
-                mp[nums[i]]++;
-        for(auto it : mp)
+        for (i=0; i<n; i++)
         {
-            if(it.second > n/2)
-                return it.first;
+            if (count == 0)
+                {
+                    element = nums[i];
+                    count++;
+                }
+            else if (nums[i] == element)
+                count++;
+            else 
+                count--;
         }
-        return -1;
+        return element;
     }
 };

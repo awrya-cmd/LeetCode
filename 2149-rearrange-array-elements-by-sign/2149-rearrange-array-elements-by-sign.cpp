@@ -3,7 +3,7 @@ class Solution
 public:
     vector<int> rearrangeArray(vector<int>& nums)
     {
-        vector<int> pos, neg, res(nums.size(), 0);
+        vector<int> pos, neg;
         for(int i = 0; i<nums.size(); i++)
         {
             if(nums[i] > 0)
@@ -13,9 +13,9 @@ public:
         }
         for(int i = 0; i < nums.size()/2; i++)
         {
-            res[2 * i] = pos[i];
-            res[2 * i + 1] = neg[i];
+            nums[2 * i] = pos[i];
+            nums[2 * i + 1] = neg[i];
         }
-        return res;
+        return nums;
     }
 };

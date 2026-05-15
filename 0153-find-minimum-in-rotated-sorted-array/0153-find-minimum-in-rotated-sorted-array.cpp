@@ -3,12 +3,17 @@ class Solution
 public:
     int findMin(vector<int>& nums)
     {
-        int i;
-        for(i = 0; i < nums.size() - 1; i++)
+        int low, mid, high;
+        low = 0;
+        high = nums.size() - 1;
+        while(low < high)
         {
-            if(nums[i] > nums[i + 1])
-                return nums[i + 1];
+            mid = low + (high - low) / 2;
+            if (nums[mid] > nums[high])
+                low = mid + 1;
+            else
+                high = mid;
         }
-        return nums[0];
+        return nums[low];
     }
 };

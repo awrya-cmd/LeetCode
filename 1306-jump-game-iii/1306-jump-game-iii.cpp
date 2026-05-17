@@ -4,35 +4,31 @@ public:
     bool canReach(vector<int>& arr, int start)
     {
         vector<bool> visited(arr.size(), false);
-        queue<int> q;
 
-        q.push(start);
-        visited[start] = true;
+        return dfs(arr, start, visited);
+    }
 
-        while(!q.empty())
-        {
-            int i = q.front();
-            q.pop();
+    bool dfs(vector<int>& arr, int curr, vector<bool>& visited)
+    {
+        // Out of bounds
+        if(curr < 0 || curr >= arr.size())
+            return false;
 
-            if(arr[i] == 0)
-                return true;
+        // Already visited
+        if(visited[curr])
+            return false;
 
-            int forward = i + arr[i];
-            int backward = i - arr[i];
+        // Found value 0
+        if(arr[curr] == 0)
+            return true;
 
-            if(forward < arr.size() && !visited[forward])
-            {
-                q.push(forward);
-                visited[forward] = true;
-            }
+        // Mark current index as visited
+        visited[curr] = true;
 
-            if(backward >= 0 && !visited[backward])
-            {
-                q.push(backward);
-                visited[backward] = true;
-            }
-        }
+        int forward = curr + arr[curr];
+        int backward = curr - arr[curr];
 
-        return false;
+        return dfs(arr, forward, visited) || 
+               dfs(arr, backward, visited);
     }
 };

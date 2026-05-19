@@ -7,12 +7,12 @@ public:
         int n = nums1.size(), m = nums2.size();
         while(j<m && i<n)
         {
+            if(nums1[i] == nums2[j])
+                return nums1[i];
             if(nums1[i] > nums2[j])
                 j++;
-            else if(nums1[i] < nums2[j])
+            else
                 i++;
-            else if(nums1[i] == nums2[j])
-                return nums1[i];
         }
         return -1;
     }

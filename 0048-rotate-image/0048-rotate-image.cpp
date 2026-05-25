@@ -3,25 +3,17 @@ class Solution
 public:
     void rotate(vector<vector<int>>& matrix)
     {
-        int n = matrix.size();
-
-        // create transpose matrix
-        vector<vector<int>> transposed(n, vector<int>(n));
-
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < matrix.size() - 1; i++)
         {
-            for(int j = 0; j < n; j++)
+            for(int j = i + 1; j < matrix[i].size(); j++)
             {
-                transposed[i][j] = matrix[j][i];
+                swap(matrix[i][j], matrix[j][i]);
             }
         }
-
-        // reverse every row
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < matrix.size(); i++)
         {
-            reverse(transposed[i].begin(), transposed[i].end());
+            reverse(matrix[i].begin(), matrix[i].end());
         }
 
-        matrix = transposed;
     }
 };

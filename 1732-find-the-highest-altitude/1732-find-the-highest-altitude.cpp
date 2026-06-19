@@ -3,15 +3,13 @@ class Solution
 public:
     int largestAltitude(vector<int>& gain)
     {
-        vector<int> ans;
+        int maxi = 0;
         int x = 0;
         for(int i = 0; i < gain.size(); i++)      
         {
-            ans.push_back(x);
             x = gain[i] + x;
+            maxi = max(x, maxi);
         }
-        ans.push_back(x);
-        int maxi = *max_element(ans.begin(), ans.end());
         return maxi;
     }
 };

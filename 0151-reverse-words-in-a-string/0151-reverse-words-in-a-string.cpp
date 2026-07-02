@@ -3,7 +3,7 @@ class Solution
 public:
     string reverseWords(string s)
     {
-        stack<string> st;
+        vector<string> list;
 
         int n = s.size();
         int i = 0;
@@ -20,19 +20,18 @@ public:
             }
             if(!word.empty())
             {
-                st.push(word);
+                list.push_back(word);
                 i++;
             }
         }
 
         string word;
 
-        while (!st.empty())
+        reverse(list.begin(), list.end());
+        for(int i = 0; i < list.size(); i++)
         {
-            word += st.top();
-            st.pop();
-            if(!st.empty())
-                word += ' ';
+            word += list[i];
+            if(i < list.size()-1) word += " ";
         }
 
         return word;

@@ -14,32 +14,32 @@ class Solution
 public:
     vector<int> postorderTraversal(TreeNode* root)
     {
+
         vector<int> ans;
-        stack<TreeNode*> st1;
-        stack<TreeNode*> st2;
-
-        if(root == NULL)
-            return ans;
+        stack<TreeNode*> st;
         
-        st1.push(root);
-        while(!st1.empty())
+        TreeNode* curr = root;
+        TreeNode* lastVisited = NULL;
+
+        while(curr != NULL || !st.empty())
         {
-            TreeNode* curr = st1.top();
-            st1.pop();
-            st2.push(curr);
+            while(curr != NULL)
+            {
+                st.push(curr);
+                curr = curr->left;
+            }
 
-            if(curr->left)
-                st1.push(curr->left);
-
-            if(curr->right)
-                st1.push(curr->right);
-        }
-
-        while(!st2.empty())
-        {
-            TreeNode* curr = st2.top();
-            st2.pop();
-            ans.push_back(curr->val);
+            TreeNode* node = st.top();
+            if(node->right != NULL && node->right != lastVisited)
+            {
+                curr = node->right;
+            }
+            else
+            {
+                ans.push_back(node->val);
+                lastVisited = node;
+                st.pop();
+            }
         }
 
         return ans;

@@ -3,13 +3,16 @@ class Solution
 public:
     vector<int> findMissingElements(vector<int>& nums)
     {
-        sort(nums.begin(), nums.end());
+        int mini = *min_element(nums.begin(), nums.end());
+        int maxi = *max_element(nums.begin(), nums.end());
+
+        unordered_set<int> st(nums.begin(), nums.end());
 
         vector<int> ans;
 
-        for(int i = 0; i < nums.size()-1; i++)
+        for(int x = mini + 1; x < maxi; x++)
         {
-            for(int x = nums[i] + 1; x < nums[i + 1]; x++)
+            if(st.find(x) == st.end())
                 ans.push_back(x);
         }
 
